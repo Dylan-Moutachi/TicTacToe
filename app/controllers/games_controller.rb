@@ -10,7 +10,7 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = current_user.games.create
+    @game = current_user.games.create(game_params)
     if @game.save
       redirect_to @game
     else
@@ -39,5 +39,11 @@ class GamesController < ApplicationController
       end
       format.html { redirect_to @game }
     end
+  end
+
+  private
+
+  def game_params
+    params.require(:game).permit(:difficulty)
   end
 end
