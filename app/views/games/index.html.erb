@@ -1,10 +1,8 @@
-<!-- app/views/games/index.html.erb -->
-
 <h1>Bienvenue dans le Tic Tac Toe !</h1>
 
 <p><%= link_to 'Créer une nouvelle partie', new_game_path, class: 'btn btn-primary' %></p>
 
-<h2>Parties en cours</h2>
+<h2>Historique des parties</h2>
 <% if @games.any? %>
   <ul>
     <% @games.each do |game| %>

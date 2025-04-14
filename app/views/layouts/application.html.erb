@@ -23,6 +23,13 @@
   </head>
 
   <body>
+    <nav class="navbar navbar-light bg-light justify-content-between px-3">
+      <span class="navbar-brand">Tic-Tac-Toe</span>
+      <% if user_signed_in? %>
+        <%= button_to 'Déconnexion', destroy_user_session_path, method: :delete, class: 'btn btn-sm btn-outline-danger' %>
+      <% end %>
+    </nav>
+
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
