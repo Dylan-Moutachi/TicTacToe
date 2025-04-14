@@ -7,6 +7,7 @@ class Game < ApplicationRecord
     self.board ||= " " * 9
     self.current_player ||= "X"
     self.status ||= "in_progress"
+    self.difficulty ||= "easy"
   end
 
   def play_move(index, user)
@@ -31,7 +32,7 @@ class Game < ApplicationRecord
   end
 
   def bot_play
-    move = find_bot_move
+    move = difficulty == "hard" ? find_best_move : find_random_move
     board[move] = "O"
     if winner
       self.status = "won_by_O"
@@ -43,7 +44,7 @@ class Game < ApplicationRecord
     save
   end
 
-  def find_bot_move
+  def find_best_move
     winning_move = find_winning_move("O")
     return winning_move if winning_move
 
@@ -56,7 +57,7 @@ class Game < ApplicationRecord
       return i if board[i] == " "
     end
 
-    board.chars.each_with_index.find { |val, _| val == " " }&.last
+    find_random_move
   end
 
   def find_winning_move(player)
@@ -76,6 +77,10 @@ class Game < ApplicationRecord
     end
 
     nil
+  end
+
+  def find_random_move
+    board.chars.each_with_index.find { |val, _| val == " " }&.last
   end
 
   def winner

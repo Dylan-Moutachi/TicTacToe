@@ -1,7 +1,19 @@
-<h2>Créer une nouvelle partie contre l'ordinateur</h2>
+<h2 class="text-center mb-4">Créer une nouvelle partie contre l'ordinateur</h2>
 
-<%= simple_form_for @game do |f| %>
-  <%= f.button :submit, 'Lancer la partie', class: 'btn btn-primary' %>
-<% end %>
+<%= link_to "Retour à l'accueil", games_path, class: 'btn btn-secondary mb-3' %>
 
-<p>Vous jouez contre l'ordinateur, qui sera le joueur "O".</p>
+<div class="card shadow-sm p-4 mx-auto" style="max-width: 500px;">
+  <div class="card-body">
+    <%= simple_form_for @game do |f| %>
+      <div class="form-group">
+        <%= f.input :difficulty, collection: ['easy', 'hard'], label: 'Difficulté', prompt: 'Choisissez une difficulté', input_html: { class: 'form-control' } %>
+      </div>
+
+      <div class="text-center">
+        <%= f.button :submit, 'Lancer la partie', class: 'btn btn-primary btn-lg w-100' %>
+      </div>
+    <% end %>
+
+    <p class="text-center mt-3">Vous jouez contre l'ordinateur, qui sera le joueur "O".</p>
+  </div>
+</div>
