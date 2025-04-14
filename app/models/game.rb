@@ -2,12 +2,18 @@ class Game < ApplicationRecord
   belongs_to :user
 
   after_initialize :set_defaults
+  before_create :set_game_number
 
   def set_defaults
     self.board ||= " " * 9
     self.current_player ||= "X"
     self.status ||= "in_progress"
     self.difficulty ||= "easy"
+  end
+
+  def set_game_number
+    max_game_number = Game.where(user_id: user_id).maximum(:game_number) || 0
+    self.game_number = max_game_number + 1
   end
 
   def play_move(index, user)
