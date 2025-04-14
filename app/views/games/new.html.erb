@@ -1,0 +1,9 @@
+<h2>Créer une nouvelle partie contre l'ordinateur</h2>
+
+<%= form_with model: @game, local: true do |f| %>
+  <div class="form-group">
+    <%= f.submit 'Lancer la partie', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<p>Vous jouez contre l'ordinateur, qui sera le joueur "O".</p>

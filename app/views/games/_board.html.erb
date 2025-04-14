@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row g-0">
+    <% @game.board.chars.each_with_index do |cell, index| %>
+      <div class="col-4 p-0">
+        <% if cell == " " && @game.current_player == "X" && @game.status == "in_progress" %>
+          <%= button_to index, play_game_path(@game, index: index), method: :post, form: { data: { turbo_frame: @game.id } }, class: "btn btn-outline-primary btn-lg w-100 h-100 p-0" %>
+        <% else %>
+          <div class="btn btn-secondary btn-lg w-100 h-100 disabled p-0">
+            <%= cell == " " ? "&nbsp;" : cell %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mt-3 text-center">
+    <% if @game.status == "in_progress" %>
+      <strong>Tour de : <%= @game.current_player == "X" ? "Vous" : "Ordinateur" %></strong>
+    <% elsif @game.status == "draw" %>
+      🤝 Match nul
+    <% else %>
+      🏆 <%= @game.status.include?("X") ? "Vous avez gagné !" : "L’ordinateur a gagné." %>
+    <% end %>
+  </div>
+</div>
