@@ -38,8 +38,16 @@ class Game < ApplicationRecord
   end
 
   def bot_play
-    move = difficulty == "hard" ? find_best_move : find_random_move
+    if difficulty == "hard"
+      move = find_best_move
+    elsif difficulty == "medium"
+      move = medium_strategy
+    else
+      move = find_random_move
+    end
+
     board[move] = "O"
+
     if winner
       self.status = "won_by_O"
     elsif board_full?
@@ -47,8 +55,18 @@ class Game < ApplicationRecord
     else
       self.current_player = "X"
     end
+
     save
   end
+
+  def medium_strategy
+    if rand < 0.5
+      find_best_move
+    else
+      find_random_move
+    end
+  end
+
 
   def find_best_move
     winning_move = find_winning_move("O")
