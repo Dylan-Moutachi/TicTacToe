@@ -1,5 +1,7 @@
 <h2>Partie contre l'ordinateur</h2>
 
+<%= link_to "Retour à l\'accueil", games_path, class: 'btn btn-secondary mb-3' %>
+
 <%= turbo_frame_tag @game do %>
   <%= render 'board', game: @game %>
 <% end %>
