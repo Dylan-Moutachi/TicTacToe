@@ -104,7 +104,9 @@ class Game < ApplicationRecord
   end
 
   def find_random_move
-    board.chars.each_with_index.find { |val, _| val == " " }&.last
+    move_list = board.chars.each_with_index.select { |val, _| val == " " }
+
+    move_list[rand(0...move_list.count)]&.last
   end
 
   def winner

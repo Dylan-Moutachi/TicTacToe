@@ -58,6 +58,13 @@ group :development do
   gem "web-console"
 end
 
+group :test do
+  gem 'factory_bot_rails'
+  gem 'faker'
+end
+
 gem "devise", "~> 4.9"
 
 gem 'simple_form'
+
+gem 'rspec-rails'
